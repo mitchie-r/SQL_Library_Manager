@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+  h1= book.title
+
+  form(action=`/books/${book.id}` method="POST")
+    if errors
+      h2.errors Error...!
+      ul.errors
+        each error in errors
+          li= error.message
+
+    include form
+
+  form(action=`/books/${book.id}/delete` method='POST')
+    input.delete(type="submit" value="Delete Book")
+    a#cancel-btn.button(href="/") Cancel

@@ -1,0 +1,40 @@
+extends layout
+
+block content
+ .nav
+  h1 Library Manager
+  p 
+    a.button(href="books/new") Create a Book
+  include search  
+  
+ h2.results-text= `Books On Current Page: ${books.length}`
+  
+ .table
+  table 
+    thead 
+      tr 
+         th Title 
+         th Author 
+         th Genre 
+         th Year 
+    tbody 
+      each book in books 
+       tr 
+         td 
+           a(href=`/books/${book.id}`)  #{book.title}
+         td= book.author 
+         td= book.genre 
+         td= book.year 
+      ul.pagination
+          li.page-item(class=(currentPage === 1) ? 'disabled' : '')
+            a(href=`/books/?page=${currentPage - 1}`) Previous
+          li.page-item(class=(currentPage === Total) ? 'disabled' : '')
+            a(href=`/books/?page=${currentPage + 1}`) Next 
+          - for (var i = 1; i <= Total; i++)
+            li.page-item(class=(i === currentPage) ? 'active' : '')
+              a(href=`/books/?page=${i}`) #{i}
+          
+         
+           
+  
+  

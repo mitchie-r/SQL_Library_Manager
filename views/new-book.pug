@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method="post")
+    if errors
+      h2.errors Error...!
+      ul.errors
+        each error in errors
+          li= error.message
+
+    include form
+
+    p 
+      a.button(href="/books") Cancel
