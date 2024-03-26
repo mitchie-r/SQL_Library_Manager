@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
           },
           title: {
             type: Sequelize.STRING,
-            allowNull: false, // disallow null
+            allowNull: false, 
             validate: {
               notEmpty: {
                 msg: 'Please provide a value for "title"'
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
           },
           author: {
             type: Sequelize.STRING,
-            allowNull: false, // disallow null
+            allowNull: false,
             validate: {
               notEmpty: {
                 msg: 'Please provide a value for "author"'
@@ -31,11 +31,11 @@ module.exports = (sequelize) => {
           },
           genre: {
             type: Sequelize.STRING,
-            allowNull: true, // disallow null
+            allowNull: true,
           },
           year: {
             type: Sequelize.INTEGER,
-            allowNull: true, // disallow null
+            allowNull: true, 
           }
        }, { sequelize })
     return Book;
