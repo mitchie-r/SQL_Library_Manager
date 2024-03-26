@@ -57,7 +57,7 @@ router.get(
     })
 );
 
-/* POST new book to the database */
+/* Post new book to the database */
 router.post(
     "/books/new",
     asyncHandler(async (req, res) => {
