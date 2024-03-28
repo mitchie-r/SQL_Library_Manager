@@ -92,6 +92,38 @@ input[type=text] {
   width: 300px;
 }
 
+#cancel-btn {
+  background-color: orangered;
+}
+#delete-btn {
+  background-color: red;
+}
+
+#update-btn {
+  background-color: rebeccapurple;;
+}
+
+#search-form {
+  display: flex;
+}
 .error {
   color: rgb(236, 15, 15);
+}
+.pagination {
+  display: flex;
+}
+.page-item {
+  display: flex;
+}
+.page-item a {
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: whitesmoke;
+  color: green;
+  padding: 4px 7px;
+}
+.page-item.disabled a {
+  pointer-events: none; /* disable pointer events */
+  background-color: white; /* change background color for disabled buttons */
+  color: gainsboro; /* change text color for disabled buttons */
 }

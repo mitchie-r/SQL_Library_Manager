@@ -4,7 +4,7 @@ block content
  .nav
   h1 Library Manager
   p 
-    a.button(href="books/new") Create a Book
+    a.button(href="/books/new") Create a Book
   include search  
   
  h2.results-text= `Books On Current Page: ${books.length}`
@@ -34,6 +34,7 @@ block content
             li.page-item(class=(i === currentPage) ? 'active' : '')
               a(href=`/books/?page=${i}`) #{i}
           
+
          
            
   

@@ -1,42 +1,37 @@
 const Sequelize = require('sequelize');
 
 'use strict';
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
     class Book extends Sequelize.Model {
       
     }
-    Book.init({
-        id: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-          },
+    Book.init(
+      {
           title: {
-            type: Sequelize.STRING,
-            allowNull: false, 
-            validate: {
-              notEmpty: {
-                msg: 'Please provide a value for "title"'
-              }
-             }
+              type: DataTypes.STRING,
+              allowNull: false,
+              validate: {
+                  notEmpty: {
+                      msg: 'Please provide a value for "title"',
+                  },
+              },
           },
           author: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            validate: {
-              notEmpty: {
-                msg: 'Please provide a value for "author"'
-              }
-             }
+              type: DataTypes.STRING,
+              allowNull: false,
+              validate: {
+                  notEmpty: {
+                      msg: 'Please provide a value for "author"',
+                  },
+              },
           },
-          genre: {
-            type: Sequelize.STRING,
-            allowNull: true,
-          },
-          year: {
-            type: Sequelize.INTEGER,
-            allowNull: true, 
-          }
-       }, { sequelize })
-    return Book;
-}
+          genre: DataTypes.STRING,
+          year: DataTypes.INTEGER,
+      },
+      {
+          sequelize,
+          modelName: "Book",
+      }
+  );
+  return Book;
+};

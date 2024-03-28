@@ -43,15 +43,19 @@ app.use((req, res, next) => {
 // Global Error Handler
 app.use((err, req, res, next) => {
   // Set default status and message
-  err.status = err.status || 500; 
-  err.message = err.message || 'Oops! Something went wrong.'; 
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // Log the error for debugging
-  console.error(err.status, err.message);
-
-  // Render the error template
-  res.status(err.status).render('error', { error: err }); 
-  res.render('error', {title: "Page Not Found", err});
+  // render the error page
+  if (err.status === 404) {
+    err.message = "Sorry, but we could not find a page for this url.";
+    res.status(404).render("page-not-found", { err });
+    console.log(err.status, err.message);
+} else {
+    err.message = `Sorry, but some server error occured. Use the "Home" button to get back to the starting page!`;
+    res.status(err.status || 500).render("error", { err });
+    console.log(err.status, err.message);
+}
 });
 
 

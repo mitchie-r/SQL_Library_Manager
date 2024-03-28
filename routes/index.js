@@ -51,9 +51,9 @@ router.get("/books/", asyncHandler(async (req, res) => {
 /* Route to enter a new book */
 router.get(
     "/books/new",
-    // Create a new book and add title since its not created yet
     asyncHandler(async (req, res) => {
-        res.render("new-book", { book: {}, title: "New Book" });
+        // render the new book form - add an empty book object because no data exists yet
+        res.render("new-book", { book: {}, title: "Create New Book" });
     })
 );
 
@@ -61,17 +61,23 @@ router.get(
 router.post(
     "/books/new",
     asyncHandler(async (req, res) => {
+        console.log("req.body:", req.body);
+
         let book;
+        console.log("book:", book);
+
         try {
+            // create new book with data from form (= req.body)
             book = await Book.create(req.body);
-            res.redirect("/");
-        } catch (error) {
-            // Check if it's a validation error
-            if (error.name === "SequelizeValidationError") {
-                console.log("err.message:", error.message);
-                res.render("new-book", { book, errors: error.errors, title: "New Book" });
+            console.log("book:", book);
+
+            res.redirect("/books");
+        } catch (err) {
+            if (err.name === "SequelizeValidationError") {
+                console.log("err.message:", err.message);
+                res.render("new-book", { book: req.body, errors: err.errors, title: "Create New Book" });
             } else {
-                throw error;
+                console.log(err);
             }
         }
     })
