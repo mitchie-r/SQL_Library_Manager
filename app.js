@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Catabase connection
+// Database connection
 (async () => {
   try {
     await Sequelize.authenticate();
@@ -48,11 +48,11 @@ app.use((err, req, res, next) => {
 
   // render the error page
   if (err.status === 404) {
-    err.message = "Sorry, but we could not find a page for this url.";
+    err.message = "This page can not be found!";
     res.status(404).render("page-not-found", { err });
     console.log(err.status, err.message);
 } else {
-    err.message = `Sorry, but some server error occured. Use the "Home" button to get back to the starting page!`;
+    err.message = `Server error occured! "Home" takes you home!`;
     res.status(err.status || 500).render("error", { err });
     console.log(err.status, err.message);
 }
