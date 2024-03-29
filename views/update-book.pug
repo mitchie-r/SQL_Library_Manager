@@ -5,7 +5,7 @@ block content
 
   form(action=`/books/${book.id}` method="POST")
     if errors
-      h2.errors Error...!
+      h2.errors Error!
       ul.errors
         each error in errors
           li= error.message
